@@ -1,1 +1,1 @@
-# An empty node project which uses ESM with Jest
+# An empty node project which allows import/export, can process packages with non-js file types, and works with Jest
