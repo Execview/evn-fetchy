@@ -1,31 +1,11 @@
 {
 	"name": "node-base",
+	"type": "module",
 	"version": "0.0.1",
 	"scripts": {
-		"start": "node --inspect index",
-		"test": "npx jest --runInBand --no-cache",
-		"clean": "wsl rm -rfd ./node_modules && wsl rm -rfd ./transpiled && wsl rm ./package-lock.json"
-	},
-	"dependencies": {
-		"@babel/register": "^7.9.0"
-	},
-	"devDependencies": {
-		"@babel/core": "^7.7.7",
-		"@babel/preset-env": "^7.7.7",
-		"babel-jest": "^24.9.0",
-		"jest": "^24.9.0"
-	},
-	"jest": {
-		"moduleNameMapper": {
-			"\\.(css|less)$": "<rootDir>/babel-import-filter.js"
-		},
-		"transform": {
-			"^.+\\.[t|j]sx?$": "babel-jest"
-		}
-	},
-	"babel": {
-		"presets": [
-			"@babel/env"
-		]
+		"dev": "npx --yes nodemon --es-module-specifier-resolution=node --inspect index",
+		"start": "node --es-module-specifier-resolution=node index",
+		"test": "npx --yes cross-env NODE_OPTIONS=--experimental-vm-modules npx --yes jest",
+		"clean": "npx --yes rimraf node_modules transpiled package-lock.json"
 	}
 }

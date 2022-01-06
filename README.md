@@ -1,1 +1,1 @@
-# An empty node project which allows import/export, can process packages with non-js file types, and works with Jest
+# An empty node project with ES6 imports, and works with Jest

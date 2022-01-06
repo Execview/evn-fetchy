@@ -1,2 +1,1 @@
-require('./babel-import-filter')
-module.exports = require("./src/main")
+import * as main from "./src/main.js"
