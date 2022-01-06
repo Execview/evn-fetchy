@@ -1,1 +1,1 @@
-import * as main from "./src/main.js"
+import "./src/main"
