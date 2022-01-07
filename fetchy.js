@@ -30,7 +30,7 @@ export const fetchy = (url,options={}) => {
 	const token = options.token
 	const basic = options.basic
 	const req_id = options.req_id
-	const timeout = options.timeout || 3000
+	const timeout = options.timeout || 60000
 	const otherOptions = removeOurOptions(options)
 
 
