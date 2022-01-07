@@ -1,11 +1,20 @@
 {
-	"name": "node-base",
+	"name": "@execview/fetchy",
 	"type": "module",
+	"main": "fetchy.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Execview/evn-fetchy.git"
+	},
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "npx --yes nodemon --es-module-specifier-resolution=node --inspect index",
 		"start": "node --es-module-specifier-resolution=node index",
 		"test": "npx --yes cross-env NODE_OPTIONS=--experimental-vm-modules npx --yes jest",
 		"clean": "npx --yes rimraf node_modules transpiled package-lock.json"
+	},
+	"dependencies": {
+		"abort-controller": "^3.0.0",
+		"node-fetch": "^3.1.0"
 	}
 }
