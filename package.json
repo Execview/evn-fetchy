@@ -1,7 +1,7 @@
 {
 	"name": "@execview/fetchy",
 	"type": "module",
-	"main": "fetchy.js",
+	"main": "./exports.js",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Execview/evn-fetchy.git"
