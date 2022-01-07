@@ -11,6 +11,7 @@
 		"dev": "npx --yes nodemon --es-module-specifier-resolution=node --inspect index",
 		"start": "node --es-module-specifier-resolution=node index",
 		"test": "npx --yes cross-env NODE_OPTIONS=--experimental-vm-modules npx --yes jest",
+		"prepublish": "npm --no-git-tag-version version patch",
 		"clean": "npx --yes rimraf node_modules transpiled package-lock.json"
 	},
 	"dependencies": {
