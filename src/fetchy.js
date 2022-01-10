@@ -1,30 +1,20 @@
-import nodeFetch from 'node-fetch'
+import crossFetch from 'cross-fetch'
 import AC from 'abort-controller';
+import crossBtoa from 'btoa-lite'
 
 const removeOurOptions = (options) => {
-	const {body,debug,token,basic,method,timeout,headers,preview,notJSON,leaveError,req_id, ...otherOptions} = options
+	const {body,debug,token,basic,method,timeout,headers,preview,jest,notJSON,leaveError,req_id, ...otherOptions} = options
 	return otherOptions
 }
 
-const globalStringOrAlt = (globalString, alt) =>{
-	let result = alt
-	try {
-		result = eval(globalString)
-	} catch (e) {
-
-	}
-	return result
-}
-
-const nodeBTOA = (str) => (new Buffer.from(str,'ascii')).toString('base64')
-
 export const fetchy = (url,options={}) => {
-	const [fetchFunction, AbortControllerClass, toBase64] = [globalStringOrAlt('fetch', nodeFetch),globalStringOrAlt('AbortController', AC), globalStringOrAlt('btoa', nodeBTOA)]
+	const [fetchFunction, AbortControllerClass, toBase64] = [crossFetch, AC, crossBtoa]
 	if(!url){console.log('WHERE IS THE LINK?!'); return}
 
 	let body = options.body
-	const previewMode = options.preview!==undefined //for when you dont want to perform the fetch, but want to debug. (the value of options.preview is resolved)
-	const debug = options.debug || previewMode
+	const jest = options.jest
+	const previewMode = jest || options.preview!==undefined //for when you dont want to perform the fetch, but want to debug. (the value of options.preview is resolved)
+	const debug = options.debug || (previewMode && !jest)
 	const ntj = options.notJSON || previewMode
 	const leaveError = options.leaveError || previewMode
 	const token = options.token
@@ -63,9 +53,10 @@ export const fetchy = (url,options={}) => {
 		fetchOptions.headers["Authorization"] = `Basic ${basicString}`
 	}
 
-	debug && console.log({url: url, fetchOptions: {...fetchOptions, body:body}})
+	const debugLog = {url: url, fetchOptions: {...fetchOptions, body:body}}
+	debug && console.log(debugLog)
 
-	let fetchPromise = previewMode ? Promise.resolve(options.preview) : fetchFunction(url, fetchOptions)
+	let fetchPromise = previewMode ? Promise.resolve(jest ? debugLog : options.preview) : fetchFunction(url, fetchOptions)
 	if(!previewMode){
 		fetchPromise = fetchPromise.then(res=>res.ok ? res : (leaveError ? Promise.reject(res) : res.text().then(err=>Promise.reject(err))))
 		if(!ntj){fetchPromise = fetchPromise.then(res=>res.json())}
