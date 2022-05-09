@@ -1,7 +1,7 @@
 {
 	"name": "@execview/fetchy",
 	"type": "module",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"main": "./exports.js",
 	"repository": {
 		"type": "git",
