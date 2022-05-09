@@ -55,7 +55,7 @@ export const fetchy = (url,options={}) => {
 	}
 	if(timeout){
 		controller = new AbortControllerClass()
-		fetchOptions.signal = controller
+		fetchOptions.signal = controller.signal
 	}
 
 	const debugLog = {url: url, fetchOptions: {...fetchOptions, body:body}}
