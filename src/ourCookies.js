@@ -2,7 +2,7 @@ export const getOurCookie = (originalCookie,getProperty) => {
 	const cookieString = decodeURIComponent(originalCookie);
 	if(!cookieString || cookieString==='null' || cookieString==='undefined'){return null}
 	const cookiePropertyMap = cookieString.split(';').map(property=>{return property.trimLeft().split("=")})
-	const cookie = cookiePropertyMap.reduce((total,p)=>{return {...total,[p[0]]:p[1]}},{});
+	const cookie = cookiePropertyMap.reduce((total,p)=>({...total,[p[0]]:p[1]}),{});
 	if(getProperty){return cookie[getProperty]}
 	return cookie;
 }

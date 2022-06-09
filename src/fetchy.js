@@ -3,7 +3,7 @@ import AC from 'abort-controller';
 import crossBtoa from 'btoa-lite'
 
 const removeOurOptions = (options) => {
-	const {body,debug,token,basic,method,timeout,headers,preview,jest,notJSON,leaveError, ...otherOptions} = options
+	const {body,debug,token,basic,method,timeout,headers,preview,jest,notJSON,leaveError,query,variables, ...otherOptions} = options
 	return otherOptions
 }
 
@@ -11,7 +11,11 @@ export const fetchy = (url,options={}) => {
 	const [fetchFunction, AbortControllerClass, toBase64] = [crossFetch, AC, crossBtoa]
 	if(!url){console.log('WHERE IS THE LINK?!'); return}
 
-	let body = options.body
+	let graphQLBody = undefined
+	if(options.query){graphQLBody = {query: options.query}}
+	if(graphQLBody && options.variables){graphQLBody = {...graphQLBody, variables: options.variables}}
+
+	let body = options.body || graphQLBody
 	const jest = options.jest
 	const previewMode = jest || options.preview!==undefined //for when you dont want to perform the fetch, but want to debug. (the value of options.preview is resolved)
 	const debug = options.debug || (previewMode && !jest)
