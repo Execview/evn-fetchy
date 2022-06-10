@@ -68,7 +68,7 @@ export const fetchy = (url,options={}) => {
 	let fetchPromise = previewMode ? Promise.resolve(jest ? debugLog : options.preview) : fetchFunction(url, fetchOptions)
 	if(!previewMode){
 		fetchPromise = fetchPromise.then(res=>res.ok ? res : (leaveError ? Promise.reject(res) : res.text().then(err=>Promise.reject(err))))
-		if(!ntj){fetchPromise = fetchPromise.then(res=>res.json())}
+		if(!ntj){fetchPromise = fetchPromise.then(res=>res.text()).then(res=>res && JSON.parse(res))}
 	}
 	
 	if(debug){fetchPromise = fetchPromise.then((res)=>{console.log(res); return res})}
