@@ -1,14 +1,14 @@
 {
 	"name": "@execview/fetchy",
 	"type": "module",
-	"version": "0.0.11",
+	"version": "0.0.12",
 	"main": "./exports.js",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Execview/evn-fetchy.git"
 	},
 	"scripts": {
-		"dev": "npx --yes cross-env NODE_OPTIONS=--experimental-vm-modules npx --yes jest --watch",
+		"dev": "npx --yes jest --watch",
 		"start": "npm test",
 		"test": "npx --yes cross-env NODE_OPTIONS=--experimental-vm-modules npx --yes jest",
 		"prepublishOnly": "npm --no-git-tag-version version patch",
@@ -17,6 +17,6 @@
 	"dependencies": {
 		"abort-controller": "^3.0.0",
 		"btoa-lite": "^1.0.0",
-		"cross-fetch": "^3.1.4"
+		"cross-fetch": "^3.1.5"
 	}
 }

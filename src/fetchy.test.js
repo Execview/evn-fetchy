@@ -4,7 +4,7 @@ const token = ""
 
 test('normal login', () => {
 	return (
-		fetchy('https://api-alpha.evlem.net/api/login',{
+		fetchy('https://alphapi.finchpm.com/api/login',{
 			timeout: 10000,
 			body:{username: 'test_user_52', password: 'password'}
 		})
@@ -16,7 +16,7 @@ test('normal login', () => {
 
 test('basic auth', () => {
 	return (
-		fetchy('https://api-alpha.evlem.net/api/login',{
+		fetchy('https://alphapi.finchpm.com/api/login',{
 			timeout: 10000,
 			body:{username: 'test_user_52', password: 'password'},
 			basic: {user: "test", password: "test"},
@@ -30,7 +30,7 @@ test('basic auth', () => {
 
 // test('empty body', () => {
 // 	return (
-// 		fetchy('https://api-alpha.evlem.net/api/org_role_list/884fa854-b9a3-48e5-82f1-395cee864a47',{
+// 		fetchy('https://alphapi.finchpm.com/api/org_role_list/884fa854-b9a3-48e5-82f1-395cee864a47',{
 // 			timeout: 10000,
 // 			token
 // 		})
